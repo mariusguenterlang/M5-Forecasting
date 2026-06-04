@@ -17,9 +17,11 @@ def main():
     labels = clean_labels(labels)
 
     # Merge data
-    data = transactions.merge(users, on='client_id', how='left')
-    data = data.merge(cards, on=["card_id", "client_id"], how='left')
-    data = data.merge(labels, left_on='client_id', right_on='id', how='left')
+    data = (transactions
+        .merge(users, on='client_id', how='left')
+        .merge(cards, on=["card_id", "client_id"], how='left')
+        .merge(labels, on='id', how='left')
+    )
 
     # Save integrated data
     data.to_csv(Path.cwd().parent / "archive" / "integrated_data.csv", index=False)

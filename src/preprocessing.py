@@ -51,6 +51,7 @@ def clean_users(users):
 
 
 def clean_transactions(transactions):
+    transactions['id'] = transactions['id'].astype('int64')
     
     #convert to datetime
     transactions['date'] = pd.to_datetime(transactions['date'])
@@ -71,11 +72,11 @@ def clean_labels(labels):
     labels.reset_index(inplace=True)
     labels.rename(columns={'index': 'id'}, inplace=True)
 
-    #convert id to numeric for later matching
-    labels['id'] = labels['id'].astype('int64')
-
     #map target to binary
     labels['target'] = labels['target'].map({'Yes': 1, 'No': 0})
+
+    #convert id to numeric for later matching
+    labels['id'] = labels['id'].astype('int64')
     
     return labels
 
@@ -83,4 +84,8 @@ def clean_labels(labels):
 if __name__ == "__main__":
     test_data = load_json("train_fraud_labels.json")
     clean_test_data = clean_labels(test_data)
+    print(clean_test_data.head())
+
+    test_data = load_csv("transactions_data.csv")
+    clean_test_data = clean_transactions(test_data)
     print(clean_test_data.head())
