@@ -17,8 +17,14 @@ def clean_cards(cards):
     cards['credit_limit'] = (cards['credit_limit'].str.replace('$', '', regex=False).astype(float))
 
     # process time data
-    date_columns = ['expires', 'acct_open_date', 'year_pin_last_changed']
-    cards[date_columns] = cards[date_columns].apply(pd.to_datetime, errors='coerce')
+    DATE_FORMATS = {
+        'expires': '%m/%Y',
+        'acct_open_date': '%m/%Y',
+        'year_pin_last_changed': '%Y'
+    }
+
+    for col, fmt in DATE_FORMATS.items():
+        cards[col] = pd.to_datetime(cards[col], format=fmt, errors='coerce')
 
     return cards
 
