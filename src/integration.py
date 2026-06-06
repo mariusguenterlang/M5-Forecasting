@@ -1,9 +1,9 @@
 import pandas as pd
 from pathlib import Path
-from ingestion import load_csv, load_json
-from preprocessing import clean_cards, clean_users, clean_transactions, clean_labels
+from src.ingestion import load_csv, load_json
+from src.preprocessing import clean_cards, clean_users, clean_transactions, clean_labels
 
-def main():
+def run_integration():
     # Load data
     transactions = load_csv("transactions_data.csv")
     users = load_csv("users_data.csv")
@@ -30,4 +30,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    run_integration()

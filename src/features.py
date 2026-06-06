@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from integration import main
+from src.integration import run_integration
 from pathlib import Path
 
 def feature_engineering(df):
@@ -34,9 +34,11 @@ def feature_engineering(df):
     df[df["target"].notna()].to_csv(Path.cwd().parent / "archive" / "labeled_data.csv", index=False)
     df[df["target"].isna()].to_csv(Path.cwd().parent / "archive" / "unlabeled_data.csv", index=False)
 
+    df = df[df["target"].notna()]
+
     return df
 
 if __name__ == "__main__":
-    df = main()
+    df = run_integration()
     df = feature_engineering(df)
     print(df.head())

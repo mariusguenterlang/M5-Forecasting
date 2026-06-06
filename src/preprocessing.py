@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from ingestion import load_csv, load_json
+from src.ingestion import load_csv, load_json
 
 def clean_cards(cards):
     cards = cards.rename(columns={'id': 'card_id'})

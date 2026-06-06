@@ -6,7 +6,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
 from lightgbm import LGBMClassifier
-from features import feature_engineering
+from src.features import feature_engineering
 
 def train(labeled_df):
     X = labeled_df.drop(columns=["target"], inplace=False)
