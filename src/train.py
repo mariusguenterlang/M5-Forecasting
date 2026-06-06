@@ -1,12 +1,8 @@
 import joblib
 import pandas as pd
 from pathlib import Path
-from sklearn.pipeline import Pipeline
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
 from lightgbm import LGBMClassifier
-from src.features import feature_engineering
 
 def train(labeled_df):
     X = labeled_df.drop(columns=["target"], inplace=False)
@@ -48,6 +44,8 @@ def train(labeled_df):
 #####
 
 if __name__ == "__main__":
+    from features import feature_engineering
+
     df = pd.read_csv(Path.cwd().parent / "archive" / "labeled_data.csv")
 
     df.drop(columns=["expires", "card_on_dark_web"], inplace=True)

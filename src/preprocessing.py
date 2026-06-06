@@ -1,6 +1,4 @@
 import pandas as pd
-import numpy as np
-from src.ingestion import load_csv, load_json
 
 def clean_cards(cards):
     cards = cards.rename(columns={'id': 'card_id'})
@@ -82,6 +80,8 @@ def clean_labels(labels):
 
 
 if __name__ == "__main__":
+    from ingestion import load_csv, load_json
+
     test_data = load_json("train_fraud_labels.json")
     clean_test_data = clean_labels(test_data)
     print(clean_test_data.head())
