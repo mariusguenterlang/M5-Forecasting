@@ -5,10 +5,7 @@ from pathlib import Path
 def evaluate():
     pipeline = joblib.load("models/lgb_model.pkl")
     data = pd.read_csv(Path.cwd().parent / "archive" / "unlabeled_data.csv")
-
-    # clean data, MOVE TO FEATURE ENGINEERING
-    data.drop(columns=["expires", "card_on_dark_web", "target"], inplace=True)
-    data[["is_retired", "is_night"]] = data[["is_retired", "is_night"]].astype(bool)
+    data = data.drop(columns=["target"], errors="ignore")
 
     cat_cols = data.select_dtypes(include=['object']).columns.tolist()
     for col in cat_cols:
@@ -22,8 +19,12 @@ def evaluate():
     data["preds"] = preds
     data["proba"] = proba
 
+    print(f'[Eval] Prediction-confidence range: {proba.min():.4f} - {proba.max():.4f}')
+
     # save predictions
     data.to_csv(Path.cwd().parent / "archive" / "predictions.csv", index=False)
+    print('[Info] Predictions saved to archive/predictions.csv')
+
     
     return data
 

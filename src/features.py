@@ -32,7 +32,7 @@ def feature_engineering(df):
                      'expires', 'card_on_dark_web'], 
                      inplace=True)
     
-    # save for testing purposes, remove from pipeline later
+    # save
     df[df["target"].notna()].to_csv(Path.cwd().parent / "archive" / "labeled_data.csv", index=False)
     df[df["target"].isna()].to_csv(Path.cwd().parent / "archive" / "unlabeled_data.csv", index=False)
 
