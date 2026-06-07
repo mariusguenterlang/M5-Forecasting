@@ -32,14 +32,6 @@ def clean_users(users):
 
     # drop information not used later, see zip removal in transactions
     users.drop(columns=['address', 'latitude', 'longitude'], inplace=True)
-
-    # map gender to binary variable  THIS CREATES BIASED MODEL, CHANGE AND MOVE TO FEATURE ENGINEERING SCRIPT
-    '''
-    if 'gender' in users.columns:
-        clean_gender = users['gender'].astype(str).str.strip().str.lower()
-        users['is_female'] = clean_gender.map({'female': 1}).fillna(0).astype(int)
-        users = users.drop(columns=['gender'])
-        '''
     
     # convert to numeric, replace currency value
     for col in ['per_capita_income', 'yearly_income', 'total_debt']:

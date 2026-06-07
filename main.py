@@ -13,14 +13,13 @@ MODEL_PATH = Path.cwd() / "models" / "lgb_model.pkl"
 def main(retrain=False):
 
     if not MODEL_PATH.exists() or retrain:
-        print("Training model...")
-        pipeline = run_integration()
-
-        pipeline = feature_engineering(pipeline)
-        pipeline = train(pipeline)
+        print("[Info] Training model ...")
+        data = run_integration()
+        data = feature_engineering(data)
+        data = train(data)
 
     else:
-        print("Loading existing model...")
+        print("[Info] Loading existing model ...")
         pipeline = joblib.load(MODEL_PATH)
 
     evaluate()

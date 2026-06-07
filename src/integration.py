@@ -1,4 +1,7 @@
 from pathlib import Path
+from src.ingestion import load_csv, load_json
+from src.preprocessing import clean_cards, clean_users, clean_transactions, clean_labels
+
 
 def run_integration():
     # Load data
@@ -6,14 +9,14 @@ def run_integration():
     users = load_csv("users_data.csv")
     cards = load_csv("cards_data.csv")
     labels = load_json("train_fraud_labels.json")
-    print("Data loaded successfully ...")
+    print("[Info] Data loaded successfully ...")
 
     # Clean data
     transactions = clean_transactions(transactions)
     users = clean_users(users)
     cards = clean_cards(cards)
     labels = clean_labels(labels)
-    print("Data cleaned successfully ...")
+    print("[Info] Data cleaned successfully ...")
 
     # Merge data
     data = (transactions
@@ -21,7 +24,7 @@ def run_integration():
         .merge(cards, on=["card_id", "client_id"], how='left')
         .merge(labels, on='id', how='left')
     )
-    print("Data merged successfully ...")
+    print("[Info] Data merged successfully ...")
 
     # Save integrated data
     data.to_csv(Path.cwd().parent / "archive" / "integrated_data.csv", index=False)

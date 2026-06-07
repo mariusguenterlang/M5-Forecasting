@@ -3,6 +3,7 @@ import pandas as pd
 from pathlib import Path
 from sklearn.model_selection import train_test_split
 from lightgbm import LGBMClassifier
+from src.features import feature_engineering
 
 def train(labeled_df):
     X = labeled_df.drop(columns=["target"], inplace=False)
@@ -37,11 +38,15 @@ def train(labeled_df):
     lgb_model.fit(X_train, y_train)
 
     # save model
+    model_dir = Path.cwd() / "models"
+    model_dir.mkdir(parents=True, exist_ok=True)
+
     joblib.dump(lgb_model, Path.cwd() / "models" / "lgb_model.pkl")
+
+    print("[Info] Model trained and saved successfully ...")
 
     return labeled_df
 
-#####
 
 if __name__ == "__main__":
     from features import feature_engineering

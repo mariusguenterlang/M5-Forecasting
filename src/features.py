@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from pathlib import Path
+from src.integration import run_integration
 
 def feature_engineering(df):
     # financial features 
