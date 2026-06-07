@@ -1,7 +1,6 @@
 # Fraud Detection Pipeline
 Welcome to the **Fraud Detection Repository**!
 This project demonstrates an end-to-end machine learning solution, from building a data ingestion pipeline to comparing and evaluating models. 
-End-to-end machine learning pipeline for detecting fraudulent credit card transactions using LightGBM.
 
 ---
 
