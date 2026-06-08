@@ -22,7 +22,7 @@ def main(retrain=False):
         print("[Info] Loading existing model ...")
         pipeline = joblib.load(MODEL_PATH)
 
-    evaluate()
+    evaluate(pipeline=pipeline)
 
 if __name__ == "__main__":
     import argparse

@@ -2,8 +2,8 @@ import joblib
 import pandas as pd
 from pathlib import Path
 
-def evaluate():
-    pipeline = joblib.load("models/lgb_model.pkl")
+def evaluate(pipeline = joblib.load("models/lgb_model.pkl")):
+    
     data = pd.read_csv(Path.cwd().parent / "archive" / "unlabeled_data.csv")
     data = data.drop(columns=["target"], errors="ignore")
 
